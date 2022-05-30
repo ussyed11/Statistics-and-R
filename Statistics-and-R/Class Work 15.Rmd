@@ -1,0 +1,45 @@
+---
+title: "Class Work 15.1"
+output: html_document
+date: '2022-05-30'
+---
+
+
+
+```{r}
+library(tidyverse)
+library(jsonlite)
+demo_table2 <- fromJSON(txt='demo.json')
+head(mpg)
+```
+```{r}
+str(mpg)
+```
+
+
+```{r}
+demo_table <- read.csv(file='demo.csv',check.names=F,stringsAsFactors = F)
+head(demo_table)
+```
+
+```{r}
+mpg_summary <- subset(mpg,manufacturer=="toyota") %>% group_by(cyl) %>% summarize(Mean_Hwy=mean(hwy), .groups = 'keep') #create summary table
+
+mpg_summary
+
+```
+
+```{r}
+plt <- ggplot(mpg_summary,aes(x=cyl,y=Mean_Hwy)) #import dataset into ggplot2
+
+plt
+```
+```{r}
+plt <- ggplot(mpg,aes(x=class, fill=class)) #import dataset into ggplot2
+plt + geom_bar()+ labs(x="Class Type", y="Count of Class Type",
+               title="Count of Class Type") #plot a bar plot
+```
+```{r}
+ggplot(mtcars,aes(x=wt)) + geom_density() #visualize distribution using density plot
+```
+
